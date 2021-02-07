@@ -83,5 +83,9 @@ async def price(ctx, url):
 
     output = soup.find(id="priceblock_ourprice").get_text()
     await ctx.send(output.strip())
-
+                   
+@bot.command()
+async def clear(ctx, amount=5):
+    await ctx.channel.purge(limit=amount)
+                   
 bot.run('Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs')
