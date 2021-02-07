@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix='$')
 @bot.event
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
-    print('Bot ID: {}'.format(bot.user.id))
+    print('Bot ID : {}'.format(bot.user.id))
 
 
 @bot.command()
