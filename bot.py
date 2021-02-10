@@ -40,16 +40,16 @@ async def math(ctx, ni, oper, ns):
 @bot.command(name='discord.py Help', aliases=['pyhelp', 'helppy', 'py'], help='All the help websites for python discord.py')
 async def py(ctx):
     embed = discord.Embed(
-        tittle='discord.py Help websites', description='Help for discord.py with different websites', colour=discord.Color.blue())
+        title="Useful Links", description="The useful links for bunny to use while coding", color=0x0b7fe5)
     embed.set_author(name=ctx.author.name,
-                     url="https://rebrand.ly/bunny-website", icon_url=ctx.author.avatar_url)
-    embed.set_thumbnail(url='https://bit.ly/3styBZX')
-    embed.add_field(
-        name='Bot Embed', value='https://medium.com/python-in-plain-english/send-an-embed-with-a-discord-bot-in-python-61d34c711046', inline=False)
-    embed.add_field(name='Repl.it Cloud',
-                    value='https://repl.it/@BunnyPranav/Bunnys-Bot#main.py', inline=False)
-    embed.add_field(name="Techraj Discord",
+                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
+    embed.add_field(name="Discord embed generator",
+                    value="https://cog-creators.github.io/discord-embed-sandbox/", inline=False)
+    embed.add_field(name="Coding help",
                     value="https://discord.com/channels/654884606750752778/654884606750752781", inline=False)
+    embed.add_field(name="Heroku hosting",
+                    value="https://dashboard.heroku.com/apps/bunnysbot/", inline=False)
+    embed.set_footer(text="All the coding help Bunny needs")
     await ctx.send(embed=embed)
 
 
@@ -93,7 +93,7 @@ async def help(ctx):
     embed = discord.Embed(title="Bunny's Bot help", url="https://dsc.gg/bunnysbot",
                           description="The help page of Bunny's Bot", color=0x07a8ed)
     embed.set_author(name=ctx.author.name,
-                     url="https://rebrand.ly/bunny-website", icon_url=ctx.author.avatar_url)
+                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
     embed.add_field(
         name="calc", value="Calculate the +,-,*,/ of 2 numbers _Ex. $calc 10 + 20_", inline=False)
     embed.add_field(
@@ -107,7 +107,26 @@ async def help(ctx):
     embed.add_field(
         name="price", value="Get the price of a amazon product _Ex. $price (amazon url)_", inline=False)
     embed.add_field(name="help", value="Shows this Message ", inline=False)
+    embed.add_field(
+        name="invite", value="Shows the invite link of this bot", inline=False)
+    embed.add_field(
+        name="py", value="Shows all the coding help links bunny needs", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
+    await ctx.send(embed=embed)
+
+
+@bot.command
+async def invite(ctx):
+    embed = discord.Embed(title="Bunny's Bot Invite",
+                          description="The invite link of this bot", color=0x057ae1)
+    embed.set_author(name=ctx.author.name,
+                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
+    embed.add_field(name="Invite link",
+                    value="https://dsc.gg/bunnysbot", inline=False)
+    embed.add_field(name="Support Server",
+                    value="https://dsc.gg/botstopia", inline=False)
+    embed.set_footer(
+        text="It will help me a lot if you could invite this bot to your server")
     await ctx.send(embed=embed)
 
 
