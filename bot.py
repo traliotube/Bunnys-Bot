@@ -111,8 +111,8 @@ async def help(ctx):
     embed.add_field(
         name="rand", value="Use rand n1 n2 and number of random numbers *Ex. $rand 10 20*", inline=False)
     embed.add_field(
-        name="price", value="Get the price of a amazon product _Ex. $price (amazon url)_", inline=True)
-    embed.add_field(name="help", value="Shows this Message ", inline=True)
+        name="price", value="Get the price of a amazon product _Ex. $price (amazon url)_", inline=False)
+    embed.add_field(name="help", value="Shows this Message ", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
     await ctx.send(embed=embed)
 
