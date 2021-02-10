@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 
 bot = commands.Bot(command_prefix='$')
 
+bot.remove_command('help')
+
 
 @bot.event
 async def on_ready():
@@ -33,6 +35,7 @@ async def math(ctx, ni, oper, ns):
         await ctx.send(int(ni)*int(ns))
     if oper == '/':
         await ctx.send(int(ni)/int(ns))
+
 
 @bot.command(name='discord.py Help', aliases=['pyhelp', 'helppy', 'py'], help='All the help websites for python discord.py')
 async def py(ctx):
@@ -83,9 +86,33 @@ async def price(ctx, url):
 
     output = soup.find(id="priceblock_ourprice").get_text()
     await ctx.send(output.strip())
-                   
+
+
 @bot.command()
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
-                   
+
+
+@bot.command()
+async def help(ctx):
+
+    embed = discord.Embed(title="Bunny's Bot help", url="https://dsc.gg/bunnysbot",
+                          description="The help page of Bunny's Bot", color=0x07a8ed)
+    embed.set_author(name=ctx.author.name,
+                     url="https://rebrand.ly/bunny-website", icon_url=ctx.author.avatar_url)
+    embed.add_field(
+        name="calc", value="Calculate the +,-,*,/ of 2 numbers _Ex. $calc 10 + 20_", inline=False)
+    embed.add_field(
+        name="ping", value="Check if the bot is alive _Ex. $ping_", inline=False)
+    embed.add_field(
+        name="clear", value="Bulk delete msgs by specifiying the number of msgs _Ex. $clear 6_", inline=False)
+    embed.add_field(
+        name="len", value="Use this command to get the length of char in a word *Ex. $len test*", inline=False)
+    embed.add_field(
+        name="rand", value="Use rand n1 n2 and number of random numbers *Ex. $rand 10 20*", inline=False)
+    embed.add_field(name="help", value="Shows this Message ", inline=True)
+    embed.set_footer(text="A general purpose bot made by Bunny Pranav")
+    await ctx.send(embed=embed)
+
+
 bot.run('Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs')
