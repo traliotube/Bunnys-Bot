@@ -65,14 +65,8 @@ async def dice(ctx):
 
 
 @bot.command(name='Random Numbers', aliases=['random', 'rand'], help='Use rand n1 n2 and number of random numbers')
-async def rand(ctx, ni, ns, number):
-    i = 0
-    rand_numbers = []
-    int_num = int(number)
-    while i < int_num:
-        rand_numbers.append(random.randint(int(ni), int(ns)))
-        i += 1
-    await ctx.send(f"The 10 random numbers are {', '.join([str(i)for i in rand_numbers])}")
+async def rand(ctx, ni, ns):
+    await ctx.send(f"The random number is {random.randint(ni, ns)}")
 
 
 @bot.command()
