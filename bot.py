@@ -115,7 +115,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-@bot.command
+@bot.command()
 async def invite(ctx):
     embed = discord.Embed(title="Bunny's Bot Invite",
                           description="The invite link of this bot", color=0x057ae1)
