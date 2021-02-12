@@ -130,4 +130,21 @@ async def invite(ctx):
     await ctx.send(embed=embed)
 
 
+@bot.command
+async def danktrade(ctx, zz, kn):
+    kn_moni = kn*200000
+    zz_moni = zz*100000
+    total_moni = kn_moni+zz_moni
+    embed = discord.Embed(title="Dank Memer KN and ZZ money Calculator",
+                          description="a money calculator for Dank Memer KN and ZZ", color=0x05acff)
+    embed.set_thumbnail(
+        url="https://cdn.discordapp.com/emojis/780515353704398869.png")
+    embed.set_author(name=ctx.author.name,
+                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
+    embed.add_field(name="Amount for KN", value=kn_moni, inline=False)
+    embed.add_field(name="Amount for ZZ", value=zz_moni, inline=False)
+    embed.add_field(name="Total Amount", value=total_moni, inline=False)
+    embed.set_footer(text="The best moni calculator for dank memer kn and zz")
+    await ctx.send(embed=embed)
+
 bot.run('Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs')
