@@ -49,6 +49,8 @@ async def py(ctx):
                     value="https://discord.com/channels/654884606750752778/654884606750752781", inline=False)
     embed.add_field(name="Heroku hosting",
                     value="https://dashboard.heroku.com/apps/bunnysbot/", inline=False)
+    embed.add_field(name="Heroku Logs",
+                    value="https://dashboard.heroku.com/apps/bunnysbot/logs", inline=False)
     embed.set_footer(text="All the coding help Bunny needs")
     await ctx.send(embed=embed)
 
