@@ -111,6 +111,8 @@ async def help(ctx):
         name="invite", value="Shows the invite link of this bot", inline=False)
     embed.add_field(
         name="py", value="Shows all the coding help links bunny needs", inline=False)
+    embed.add_field(
+        name="danktrade", value="Check the amount of kn an zz while trading", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
     await ctx.send(embed=embed)
 
