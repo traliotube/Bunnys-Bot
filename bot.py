@@ -134,7 +134,7 @@ async def invite(ctx):
     await ctx.send(embed=embed)
 
 
-@bot.command
+@bot.command()
 async def danktrade(ctx, zz, kn):
     kn_moni = kn*200000
     zz_moni = zz*100000
