@@ -135,7 +135,7 @@ async def invite(ctx):
 
 
 @bot.command()
-async def danktrade(ctx, zz, kn):
+async def danktrade(ctx, zz: int, kn: int):
     kn_moni = kn*200000
     zz_moni = zz*100000
     total_moni = kn_moni+zz_moni
