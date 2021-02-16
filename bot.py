@@ -17,7 +17,7 @@ bot.remove_command('help')
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID : {}'.format(bot.user.id))
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"I am in {len(client.guilds)} servers!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"I am in {len(bot.guilds)} servers!"))
 
 
 @bot.command()
