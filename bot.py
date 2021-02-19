@@ -1,6 +1,7 @@
 import discord
 import random
 import requests
+import re
 from discord.ext import commands
 from bs4 import BeautifulSoup
 
@@ -9,7 +10,6 @@ bot = commands.Bot(
     case_insensitive=True
 )
 
-
 bot.remove_command('help')
 
 
@@ -17,7 +17,7 @@ bot.remove_command('help')
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID : {}'.format(bot.user.id))
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"I am in {len(bot.guilds)} servers!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"to your commands with prefix '$'"))
 
 
 @bot.command()
@@ -27,7 +27,7 @@ async def ping(ctx):
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
 async def clear(ctx, ammount=4):
-    await ctx.channel.purge(limit=ammount)
+    await ctx.channel.purge(limit=ammount+1)
 
 
 @bot.command(name='Math Calcualtor', help='Use math n1 operation n2, for using the math calculator.', aliases=['math', 'calc'])
@@ -97,6 +97,8 @@ async def clear(ctx, amount=5):
 @bot.command()
 async def help(ctx):
 
+    author = ctx.message.author
+
     embed = discord.Embed(title="Bunny's Bot help", url="https://dsc.gg/bunnysbot",
                           description="The help page of Bunny's Bot", color=0x07a8ed)
     embed.set_author(name=ctx.author.name,
@@ -115,27 +117,37 @@ async def help(ctx):
         name="price", value="Get the price of a amazon product _Ex. $price (amazon url)_", inline=False)
     embed.add_field(name="help", value="Shows this Message ", inline=False)
     embed.add_field(
-        name="invite", value="Shows the invite link of this bot", inline=False)
+        name="info", value="Shows the Information of this bot", inline=False)
     embed.add_field(
         name="py", value="Shows all the coding help links bunny needs", inline=False)
     embed.add_field(
         name="danktrade", value="Check the amount of kn an zz while trading", inline=False)
+    embed.add_field(
+        name="botify", value="Add the bot tag to your Message", inline=False)
+    embed.add_field(
+        name="emojify", value="Make you text into emoji", inline=False)
+    embed.add_field(name="spoilify",
+                    value="Make you text ||concealed||", inline=False)
+    embed.add_field(
+        name="members", value="Gives number of member count in a server", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
-    await ctx.send(embed=embed)
+    await author.send(embed=embed)
+    await ctx.send("You Have got Mail <:mail:812334350233632798> !!")
 
 
 @bot.command()
-async def invite(ctx):
-    embed = discord.Embed(title="Bunny's Bot Invite",
-                          description="The invite link of this bot", color=0x057ae1)
-    embed.set_author(name=ctx.author.name,
-                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
-    embed.add_field(name="Invite link",
+async def info(ctx):
+    embed = discord.Embed(title="Bunny's Bot Info",
+                          description="The Info of this bot", color=0x05b1eb)
+    embed.add_field(name="Invite Link",
                     value="https://dsc.gg/bunnysbot", inline=False)
     embed.add_field(name="Support Server",
                     value="https://dsc.gg/botstopia", inline=False)
-    embed.set_footer(
-        text="It will help me a lot if you could invite this bot to your server")
+    embed.add_field(name="Servers I am in",
+                    value=len(bot.guilds), inline=False)
+    embed.add_field(name="My Creator And Developer",
+                    value="Bunny Pranav#8468", inline=False)
+    embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
     await ctx.send(embed=embed)
 
 
@@ -156,4 +168,67 @@ async def danktrade(ctx, zz: int, kn: int):
     embed.set_footer(text="The best moni calculator for dank memer kn and zz")
     await ctx.send(embed=embed)
 
-bot.run('Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs')
+
+@bot.command()
+async def spoilify(ctx, *, text: str):
+    '''
+    Converts the alphabet and spaces into hidden secrets
+    '''
+    author = ctx.message.author
+    spoilified = ''
+    if text == '':
+        await ctx.send('Remember to say what you want to convert!')
+    else:
+        for i in text:
+            spoilified += '||{}||'.format(i)
+        if len(spoilified) + 2 >= 2000:
+            await ctx.send('Your message in spoilers exceeds 2000 characters!')
+        if len(spoilified) <= 4:
+            await ctx.send('Your message could not be converted!')
+        else:
+            await ctx.send(spoilified)
+
+
+@bot.command()
+async def emojify(ctx, *, text: str):
+    '''
+    Converts the alphabet and spaces into emoji
+    '''
+    author = ctx.message.author
+    emojified = ''
+    formatted = re.sub(r'[^A-Za-z ]+', "", text).lower()
+    if text == '':
+        await ctx.send('Remember to say what you want to convert!')
+    else:
+        for i in formatted:
+            if i == ' ':
+                emojified += '     '
+            else:
+                emojified += ':regional_indicator_{}: '.format(i)
+        if len(emojified) + 2 >= 2000:
+            await ctx.send('Your message in emojis exceeds 2000 characters!')
+        if len(emojified) <= 25:
+            await ctx.send('Your message could not be converted!')
+        else:
+            await ctx.send(emojified)
+
+
+@bot.command()
+async def botify(ctx, *, message):
+    '''
+    Creates a webhook, that says what you say. Like echo.
+    '''
+    pfp = requests.get(ctx.author.avatar_url_as(
+        format='png', size=256)).content
+    hook = await ctx.channel.create_webhook(name=ctx.author.display_name,
+                                            avatar=pfp)
+
+    await hook.send(message)
+    await hook.delete()
+
+
+@bot.command()
+async def members(ctx):
+    await ctx.send(f'`No of members Are`: **{ctx.guild.member_count}**')
+
+bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
