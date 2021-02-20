@@ -187,6 +187,7 @@ async def spoilify(ctx, *, text: str):
         if len(spoilified) <= 4:
             await ctx.send('Your message could not be converted!')
         else:
+            await ctx.message.delete()
             await ctx.send(spoilified)
 
 
@@ -224,6 +225,7 @@ async def botify(ctx, *, message):
     hook = await ctx.channel.create_webhook(name=ctx.author.display_name,
                                             avatar=pfp)
 
+    await ctx.message.delete()
     await hook.send(message)
     await hook.delete()
 
