@@ -234,4 +234,4 @@ async def botify(ctx, *, message):
 async def members(ctx):
     await ctx.send(f'`No of members Are`: **{ctx.guild.member_count}**')
 
-bot.run('Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs')
+bot.run(os.getenv("TOKEN"))
