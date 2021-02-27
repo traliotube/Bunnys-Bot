@@ -194,6 +194,7 @@ async def spoilify(ctx, *, text: str):
         if len(spoilified) <= 4:
             await ctx.send('Your message could not be converted!')
         else:
+            await author.send('`'+spoilified+'`')
             await ctx.message.delete()
             await ctx.send(spoilified)
 
