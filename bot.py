@@ -28,7 +28,8 @@ async def ping(ctx):
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
 async def clear(ctx, ammount=4):
-    await ctx.channel.purge(limit=ammount+1)
+    ammount += 1
+    await ctx.channel.purge(limit=ammount)
 
 
 @bot.command(name='Math Calcualtor', help='Use math n1 operation n2, for using the math calculator.', aliases=['math', 'calc'])
