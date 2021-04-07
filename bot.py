@@ -28,7 +28,8 @@ async def ping(ctx):
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
 async def clear(ctx, ammount=4):
-    ammount += 1
+    am = ammount
+
     await ctx.channel.purge(limit=ammount)
 
 
@@ -93,7 +94,8 @@ async def price(ctx, url):
 
 @bot.command()
 async def clear(ctx, amount=5):
-    await ctx.channel.purge(limit=amount)
+    amount1 = amount+1
+    await ctx.channel.purge(limit=amount1)
 
 
 @bot.command()
