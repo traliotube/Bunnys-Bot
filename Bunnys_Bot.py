@@ -49,8 +49,8 @@ async def math(ctx, ni, oper, ns):
 async def py(ctx):
     embed = discord.Embed(
         title="Useful Links", description="The useful links for bunny to use while coding", color=0x0b7fe5)
-    embed.set_author(name=ctx.author.name,
-                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
+    embed.add_field(name="Developer Website",
+                    value="https://bunnyorg.tk/", inline=False)
     embed.add_field(name="Discord embed generator",
                     value="https://cog-creators.github.io/discord-embed-sandbox/", inline=False)
     embed.add_field(name="Coding help",
@@ -105,8 +105,8 @@ async def help(ctx):
 
     embed = discord.Embed(title="Bunny's Bot help", url="https://dsc.gg/bunnysbot",
                           description="The help page of Bunny's Bot", color=0x07a8ed)
-    embed.set_author(name=ctx.author.name,
-                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
+    embed.add_field(name="Developer Website",
+                    value="https://bunnyorg.tk/", inline=False)
     embed.add_field(
         name="calc", value="Calculate the +,-,*,/ of 2 numbers _Ex. $calc 10 + 20_", inline=False)
     embed.add_field(
@@ -124,8 +124,6 @@ async def help(ctx):
         name="info", value="Shows the Information of this bot", inline=False)
     embed.add_field(
         name="py", value="Shows all the coding help links bunny needs", inline=False)
-    embed.add_field(
-        name="danktrade", value="Check the amount of kn an zz while trading", inline=False)
     embed.add_field(
         name="botify", value="Add the bot tag to your Message", inline=False)
     embed.add_field(
@@ -152,31 +150,13 @@ async def info(ctx):
                           description="The Info of this bot", color=0x05b1eb)
     embed.add_field(name="Invite Link",
                     value="https://dsc.gg/bunnysbot", inline=False)
-    embed.add_field(name="Support Server",
-                    value="https://dsc.gg/botstopia", inline=False)
+    embed.add_field(name="Developer Website",
+                    value="https://bunnyorg.tk/", inline=False)
     embed.add_field(name="Servers I am in",
                     value=len(bot.guilds), inline=False)
     embed.add_field(name="My Creator And Developer",
                     value="Bunny Pranav#8468", inline=False)
     embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
-    await ctx.send(embed=embed)
-
-
-@bot.command(alias=['dankmoni', 'dankt', 'dt', 'knzz'])
-async def danktrade(ctx, zz: int, kn: int):
-    kn_moni = kn*200000
-    zz_moni = zz*100000
-    total_moni = kn_moni+zz_moni
-    embed = discord.Embed(title="Dank Memer KN and ZZ money Calculator",
-                          description="a money calculator for Dank Memer KN and ZZ", color=0x05acff)
-    embed.set_thumbnail(
-        url="https://cdn.discordapp.com/emojis/780515353704398869.png")
-    embed.set_author(name=ctx.author.name,
-                     url="https://dsc.gg/botstopia", icon_url=ctx.author.avatar_url)
-    embed.add_field(name="Amount for KN", value=kn_moni, inline=False)
-    embed.add_field(name="Amount for ZZ", value=zz_moni, inline=False)
-    embed.add_field(name="Total Amount", value=total_moni, inline=False)
-    embed.set_footer(text="The best moni calculator for dank memer kn and zz")
     await ctx.send(embed=embed)
 
 
