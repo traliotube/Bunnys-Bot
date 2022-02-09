@@ -130,6 +130,8 @@ async def info(ctx):
                           description="The Info of this bot", color=0x05b1eb)
     embed.add_field(name="Invite Link",
                     value="https://dsc.gg/bunnysbot", inline=False)
+    embed.add_field(name="Support Server",
+                    value="https://discord.gg/dTehKH5kNE", inline=False)
     embed.add_field(name="Developer Website",
                     value="https://bunnyorg.tk/", inline=False)
     embed.add_field(name="Servers I am in",
