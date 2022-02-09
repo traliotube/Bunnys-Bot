@@ -114,7 +114,7 @@ async def help(ctx):
         name="members", value="Gives number of member count in a server", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
     await author.send(embed=embed)
-    await ctx.send(" <:mail:812334350233632798> You Have got Mail!! <:mail:812334350233632798> ")
+    await ctx.send(" <:mail:867307286363897868> You Have got Mail!! <:mail:867307286363897868> ")
     await ctx.message.add_reaction('🇸')
     await ctx.message.add_reaction('🇪')
     await ctx.message.add_reaction('🇳')
