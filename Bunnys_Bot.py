@@ -45,24 +45,6 @@ async def math(ctx, ni, oper, ns):
         await ctx.send(int(ni)/int(ns))
 
 
-@bot.command(name='discord.py Help', aliases=['pyhelp', 'helppy', 'py'], help='All the help websites for python discord.py')
-async def py(ctx):
-    embed = discord.Embed(
-        title="Useful Links", description="The useful links for bunny to use while coding", color=0x0b7fe5)
-    embed.add_field(name="Developer Website",
-                    value="https://bunnyorg.tk/", inline=False)
-    embed.add_field(name="Discord embed generator",
-                    value="https://cog-creators.github.io/discord-embed-sandbox/", inline=False)
-    embed.add_field(name="Coding help",
-                    value="https://discord.com/channels/654884606750752778/654884606750752781", inline=False)
-    embed.add_field(name="Heroku hosting",
-                    value="https://dashboard.heroku.com/apps/bunnysbot/", inline=False)
-    embed.add_field(name="Heroku Logs",
-                    value="https://dashboard.heroku.com/apps/bunnysbot/logs", inline=False)
-    embed.set_footer(text="All the coding help Bunny needs")
-    await ctx.send(embed=embed)
-
-
 @bot.command(aliases=['len', 'length'], name='Length of word char', help='Use this command to get the length of char in a word')
 async def _len(ctx, text='example'):
     await ctx.send(f'The length of {text} is {len(text)}')
@@ -122,8 +104,6 @@ async def help(ctx):
     embed.add_field(name="help", value="Shows this Message ", inline=False)
     embed.add_field(
         name="info", value="Shows the Information of this bot", inline=False)
-    embed.add_field(
-        name="py", value="Shows all the coding help links bunny needs", inline=False)
     embed.add_field(
         name="botify", value="Add the bot tag to your Message", inline=False)
     embed.add_field(
