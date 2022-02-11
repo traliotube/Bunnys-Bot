@@ -224,19 +224,4 @@ async def on_dbl_vote(data):
 
     print(f"Received a vote:\n{data}")
 
-
-async def bot_vote_handler(request):
-    # Default value will be empty string to allow all requests
-    auth = request.headers.get("Authorization", "")
-    if auth == dbl_auth:
-        # Process the vote and return response code 2xx
-        return web.Response(status=200, text="OK")
-    # Return code 401 if authorization fails
-    # 4xx response codes tell Top.gg services not to retry the request
-    return web.Response(status=401, text="Authorization failed")
-
-bot.topgg_webhook = topgg.WebhookManager(bot)
-bot.topgg_webhook.webserver.router.add_post(
-    path="/dbl", handler=bot_vote_handler)
-
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
