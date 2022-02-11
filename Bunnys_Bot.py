@@ -3,15 +3,19 @@ import random
 import requests
 import re
 import os
+import topgg
 from discord.ext import commands
+from discord.ext import tasks
+from aiohttp import web
 from bs4 import BeautifulSoup
 
 bot = commands.Bot(
     command_prefix="$",
     case_insensitive=True
 )
-
 bot.remove_command('help')
+bot.topggpy = topgg.DBLClient(
+    bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
 
 
 @bot.event
@@ -206,5 +210,33 @@ async def botify(ctx, *, message):
 @bot.command()
 async def members(ctx):
     await ctx.send(f'`No of members Are`: **{ctx.guild.member_count}**')
+
+# end commands
+
+
+@bot.event
+async def on_dbl_vote(data):
+    """An event that is called whenever someone votes for the bot on Top.gg."""
+    if data["type"] == "test":
+        # this is roughly equivalent to
+        # `return await on_dbl_test(data)` in this case
+        return bot.dispatch("dbl_test", data)
+
+    print(f"Received a vote:\n{data}")
+
+
+async def bot_vote_handler(request):
+    # Default value will be empty string to allow all requests
+    auth = request.headers.get("Authorization", "")
+    if auth == dbl_auth:
+        # Process the vote and return response code 2xx
+        return web.Response(status=200, text="OK")
+    # Return code 401 if authorization fails
+    # 4xx response codes tell Top.gg services not to retry the request
+    return web.Response(status=401, text="Authorization failed")
+
+bot.topgg_webhook = topgg.WebhookManager(bot)
+bot.topgg_webhook.webserver.router.add_post(
+    path="/dbl", handler=bot_vote_handler)
 
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
