@@ -6,7 +6,6 @@ import os
 import topgg
 from discord.ext import commands
 from discord.ext import tasks
-from aiohttp import web
 from bs4 import BeautifulSoup
 
 bot = commands.Bot(
