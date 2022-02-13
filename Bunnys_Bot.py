@@ -15,13 +15,14 @@ bot = commands.Bot(
 bot.remove_command('help')
 bot.topggpy = topgg.DBLClient(
     bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
-
+owner= client.get_user(750006475400675370)
 
 @bot.event
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID : {}'.format(bot.user.id))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"to your commands with prefix '$'"))
+    await owner.send("Bot is online")   
 
 
 @bot.command()
@@ -214,12 +215,15 @@ async def members(ctx):
 
 @tasks.loop(minutes=30)
 async def update_stats():
-    """This function runs every 30 minutes to automatically update your server count."""
+    #This function runs every 30 minutes to automatically update your server count.
     try:
         await bot.topggpy.post_guild_count()
         print(f"Posted server count ({bot.topggpy.guild_count})")
+        await owner.send(f"Posted server count ({bot.topggpy.guild_count})")
+
     except Exception as e:
         print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
+
 
 
 update_stats.start()
