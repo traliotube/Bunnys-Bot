@@ -15,13 +15,13 @@ bot = commands.Bot(
 bot.remove_command('help')
 bot.topggpy = topgg.DBLClient(
     bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
-owner= ctx.get_user(750006475400675370)
 
 @bot.event
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID : {}'.format(bot.user.id))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"to your commands with prefix '$'"))
+    owner= client.get_user(750006475400675370)
     await owner.send("Bot is online")   
 
 
