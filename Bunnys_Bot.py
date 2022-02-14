@@ -239,7 +239,6 @@ async def update_stats():
 
 update_stats.start()
 ready_task = bot.loop.create_task(send_self_dm())
-ready_task.add_done_callback(lambda t: traceback.print_exception(e.__type__, e, e.__traceback__) if (e := t.exception()) else None)
 
 #use bot.run() with os env variables to run the bot
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
