@@ -2,3 +2,4 @@ discord
 requests
 beautifulsoup4
 topggpy
+traceback

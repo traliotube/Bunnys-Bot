@@ -10,25 +10,35 @@ from bs4 import BeautifulSoup
 
 bot = commands.Bot(
     command_prefix="$",
-    case_insensitive=True
+    case_insensitive=True,
+    intents=discord.Intents.all()
 )
-bot.remove_command('help')
 bot.topggpy = topgg.DBLClient(
     bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
+
+bot.remove_command('help')
+
+async def send_self_dm():
+    await bot.wait_until_ready()
+    owner = bot.get_user(750006475400675370)
+    await owner.send("Bot is online")
 
 @bot.event
 async def on_ready():
     print('Connected to bot: {}'.format(bot.user.name))
     print('Bot ID : {}'.format(bot.user.id))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"to your commands with prefix '$'"))
-    owner= client.get_user(750006475400675370)
-    await owner.send("Bot is online")   
 
+
+@bot.event
+async def on_guild_join(guild):
+    for guild in bot.guilds:
+        owner = bot.get_user(750006475400675370)
+        await owner.send(f"I have joined {guild.name} Its ID is {guild.id} Icon is ```{guild.icon_url}```")
 
 @bot.command()
 async def ping(ctx):
     await ctx.reply(f'Hello! I am there and my latency is {round(bot.latency*1000)}ms ')
-
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
 async def clear(ctx, ammount=4):
@@ -117,8 +127,8 @@ async def help(ctx):
     embed.add_field(
         name="members", value="Gives number of member count in a server", inline=False)
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
-    await author.reply(embed=embed)
-    await ctx.send(" <:mail:867307286363897868> You Have got Mail!! <:mail:867307286363897868> ")
+    await author.send(embed=embed)
+    await ctx.reply(" <:mail:867307286363897868> You have got a DM!! <:mail:867307286363897868> ")
     await ctx.message.add_reaction('🇸')
     await ctx.message.add_reaction('🇪')
     await ctx.message.add_reaction('🇳')
@@ -213,19 +223,24 @@ async def members(ctx):
 
 # end commands
 
+
 @tasks.loop(minutes=30)
 async def update_stats():
-    #This function runs every 30 minutes to automatically update your server count.
+    # This function runs every 30 minutes to automatically update your server count.
     try:
         await bot.topggpy.post_guild_count()
         print(f"Posted server count ({bot.topggpy.guild_count})")
+        owner = bot.get_user(750006475400675370)
         await owner.send(f"Posted server count ({bot.topggpy.guild_count})")
 
     except Exception as e:
         print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
 
 
-
 update_stats.start()
+ready_task = bot.loop.create_task(send_self_dm())
+ready_task.add_done_callback(lambda t: traceback.print_exception(e.__type__, e, e.__traceback__) if (e := t.exception()) else None)
 
+#use bot.run() with os env variables to run the bot
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
+
