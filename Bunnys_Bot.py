@@ -155,6 +155,20 @@ async def info(ctx):
     embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
     await ctx.reply(embed=embed)
 
+@bot.command()
+async def vote(ctx):
+    embed = discord.Embed(title="Bunny's Bot Vote",
+                          description="The Vote page of this bot", color=0x05b1eb)
+    embed.add_field(name="Top GG Support Server Vote",
+                    value="https://top.gg/servers/940846154583797800/vote", inline=False)
+    embed.add_field(name="Top GG Bot Vote",
+                    value="https://top.gg/bot/798198361064603711/vote", inline=False)
+    embed.add_field(name="Discord Bot List",
+                    value="https://discordbotlist.com/bots/bunnys-bot/upvote", inline=False)
+    embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
+    await ctx.reply(embed=embed)
+
+
 
 @bot.command()
 async def spoilify(ctx, *, text: str):
@@ -223,7 +237,6 @@ async def members(ctx):
 
 # end commands
 
-
 @tasks.loop(minutes=30)
 async def update_stats():
     # This function runs every 30 minutes to automatically update your server count.
@@ -236,10 +249,17 @@ async def update_stats():
     except Exception as e:
         print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
 
+@tasks.loop(hours=12)
+async def votebunny():
+    # This function runs every 12 hours to automatically send bunny a DM.
+    owner = bot.get_user(750006475400675370)
+    await owner.send('https://top.gg/bot/798198361064603711/vote')
+    await owner.send('https://top.gg/servers/940846154583797800/votes')
+    await owner.send('https://discordbotlist.com/bots/bunnys-bot/upvote')
+
 
 update_stats.start()
 ready_task = bot.loop.create_task(send_self_dm())
 
-#use bot.run() with os env variables to run the bot
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
 
