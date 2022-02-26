@@ -243,8 +243,6 @@ async def update_stats():
     try:
         await bot.topggpy.post_guild_count()
         print(f"Posted server count ({bot.topggpy.guild_count})")
-        owner = bot.get_user(750006475400675370)
-        await owner.send(f"Posted server count ({bot.topggpy.guild_count})")
 
     except Exception as e:
         print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
@@ -259,6 +257,7 @@ async def votebunny():
 
 
 update_stats.start()
+votebunny.start()
 ready_task = bot.loop.create_task(send_self_dm())
 
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
