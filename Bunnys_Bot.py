@@ -34,7 +34,7 @@ async def on_ready():
 async def on_guild_join(guild):
     for guild in bot.guilds:
         owner = bot.get_user(750006475400675370)
-        await owner.send(f"I have joined {guild.name} Its ID is {guild.id}. Icon is ```{guild.icon_url}```. Owner is {guild.owner}")
+        await owner.send(f"I have joined {guild.name} Its ID is {guild.id}. Icon is ```{guild.icon_url}```. Owner is {guild.owner_id}")
 
 @bot.command()
 async def ping(ctx):
