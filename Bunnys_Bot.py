@@ -241,17 +241,7 @@ async def update_stats():
     except Exception as e:
         print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
 
-@tasks.loop(hours=12)
-async def votebunny():
-    # This function runs every 12 hours to automatically send bunny a DM.
-    owner = bot.get_user(750006475400675370)
-    await owner.send('https://top.gg/bot/798198361064603711/vote')
-    await owner.send('https://top.gg/servers/940846154583797800/votes')
-    await owner.send('https://discordbotlist.com/bots/bunnys-bot/upvote')
-
-
 update_stats.start()
-votebunny.start()
 ready_task = bot.loop.create_task(send_self_dm())
 
 bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
