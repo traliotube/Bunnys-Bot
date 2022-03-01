@@ -7,6 +7,7 @@ import topgg
 from discord.ext import commands
 from discord.ext import tasks
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 bot = commands.Bot(
     command_prefix="$",
@@ -15,6 +16,7 @@ bot = commands.Bot(
 )
 bot.topggpy = topgg.DBLClient(
     bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
+load_dotenv()
 
 bot.remove_command('help')
 
@@ -244,5 +246,4 @@ async def update_stats():
 update_stats.start()
 ready_task = bot.loop.create_task(send_self_dm())
 
-bot.run("Nzk4MTk4MzYxMDY0NjAzNzEx.X_xiJw.VprDLErH56HFgtbSumFHWy1jHIs")
-
+bot.run(os.getenv("TOKEN"))
