@@ -9,13 +9,13 @@ from discord.ext import tasks
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
+load_dotenv()
 bot = commands.Bot(
     command_prefix="$",
     case_insensitive=True,
     intents=discord.Intents.all()
 )
 bot.topggpy = topgg.DBLClient(bot, os.getenv("TOPGGTOKEN"))
-load_dotenv()
 
 bot.remove_command('help')
 
