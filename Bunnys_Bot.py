@@ -14,16 +14,17 @@ bot = commands.Bot(
     case_insensitive=True,
     intents=discord.Intents.all()
 )
-bot.topggpy = topgg.DBLClient(
-    bot, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5ODE5ODM2MTA2NDYwMzcxMSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjQ0NTUwMzQ2fQ.uAXgQVWjGAh7QZUyKrvLihMmem1hHTyLvoZPBUSMWPU")
+bot.topggpy = topgg.DBLClient(bot, os.getenv("TOPGGTOKEN"))
 load_dotenv()
 
 bot.remove_command('help')
+
 
 async def send_self_dm():
     await bot.wait_until_ready()
     owner = bot.get_user(750006475400675370)
     await owner.send("Bot is online")
+
 
 @bot.event
 async def on_ready():
@@ -38,9 +39,11 @@ async def on_guild_join(guild):
         owner = bot.get_user(750006475400675370)
         await owner.send(f"I have joined {guild.name} Its ID is {guild.id}. Icon is ```{guild.icon_url}```. Owner is {guild.owner_id}")
 
+
 @bot.command()
 async def ping(ctx):
     await ctx.reply(f'Hello! I am there and my latency is {round(bot.latency*1000)}ms ')
+
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
 async def clear(ctx, ammount=4):
@@ -157,6 +160,7 @@ async def info(ctx):
     embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
     await ctx.reply(embed=embed)
 
+
 @bot.command()
 async def vote(ctx):
     embed = discord.Embed(title="Bunny's Bot Vote",
@@ -171,10 +175,9 @@ async def vote(ctx):
     await ctx.reply(embed=embed)
 
 
-
 @bot.command()
 async def spoilify(ctx, *, text: str):
-    #Converts the alphabet and spaces into hidden secrets
+    # Converts the alphabet and spaces into hidden secrets
     author = ctx.message.author
     spoilified = ''
     if text == '':
@@ -194,7 +197,7 @@ async def spoilify(ctx, *, text: str):
 
 @bot.command()
 async def emojify(ctx, *, text: str):
-    #Converts the alphabet and spaces into emoji
+    # Converts the alphabet and spaces into emoji
     author = ctx.message.author
     emojified = ''
     formatted = re.sub(r'[^A-Za-z ]+', "", text).lower()
@@ -216,7 +219,7 @@ async def emojify(ctx, *, text: str):
 
 @bot.command()
 async def botify(ctx, *, message):
-    #Creates a webhook, that says what you say. Like echo.
+    # Creates a webhook, that says what you say. Like echo.
     pfp = requests.get(ctx.author.avatar_url_as(
         format='png', size=256)).content
     hook = await ctx.channel.create_webhook(name=ctx.author.display_name,
@@ -232,6 +235,7 @@ async def members(ctx):
     await ctx.reply(f'`No of members Are`: **{ctx.guild.member_count}**')
 
 # end commands
+
 
 @tasks.loop(minutes=30)
 async def update_stats():
