@@ -222,11 +222,10 @@ async def botify(ctx, *, message):
     # Creates a webhook, that says what you say. Like echo.
     pfp = requests.get(ctx.author.avatar_url_as(
         format='png', size=256)).content
-    hook = await ctx.channel.create_webhook(name=ctx.author.display_name,
-                                            avatar=pfp)
+    hook = await ctx.channel.create_webhook(name=ctx.author.display_name, avatar=pfp)
 
     await ctx.message.delete()
-    await hook.reply(message)
+    await hook.send(message)
     await hook.delete()
 
 
