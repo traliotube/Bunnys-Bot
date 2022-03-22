@@ -55,7 +55,7 @@ async def clear(ctx, ammount=4):
 @clear.error
 async def clear_error(ctx,error):
     if isinstance(error, CheckFailure):
-        msg = 'only mods can use this command!'  
+        msg = 'Only mods can use this command!'  
         await ctx.send(msg)
 
 
