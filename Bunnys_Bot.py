@@ -8,6 +8,7 @@ from discord.ext import commands
 from discord.ext import tasks
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+from discord.ext.commands import has_permissions, CheckFailure
 
 load_dotenv()
 bot = commands.Bot(
@@ -45,11 +46,17 @@ async def ping(ctx):
     await ctx.reply(f'Hello! I am there and my latency is {round(bot.latency*1000)}ms ')
 
 
-@bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
+@bot.command(name='clear', help='Bulk delete messages by specifying number of messages to delete')
+@has_permissions(manage_channels = True, manage_roles = True, ban_members=True)
 async def clear(ctx, ammount=4):
     am = ammount
-
     await ctx.channel.purge(limit=ammount)
+
+@clear.error
+async def clear_error(ctx,error):
+    if isinstance(error, CheckFailure):
+        msg = 'Only mods can use this command!'  
+        await ctx.send(msg)
 
 
 @bot.command(name='Math Calcualtor', help='Use math n1 operation n2, for using the math calculator.', aliases=['math', 'calc'])
@@ -91,12 +98,6 @@ async def price(ctx, url):
 
     output = soup.find(id="priceblock_ourprice").get_text()
     await ctx.reply(output.strip())
-
-
-@bot.command()
-async def clear(ctx, amount=5):
-    amount1 = amount+1
-    await ctx.channel.purge(limit=amount1)
 
 
 @bot.command()
