@@ -46,6 +46,7 @@ async def ping(ctx):
 
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
+@commands.is_owner()
 async def clear(ctx, ammount=4):
     am = ammount
 
@@ -91,12 +92,6 @@ async def price(ctx, url):
 
     output = soup.find(id="priceblock_ourprice").get_text()
     await ctx.reply(output.strip())
-
-
-@bot.command()
-async def clear(ctx, amount=5):
-    amount1 = amount+1
-    await ctx.channel.purge(limit=amount1)
 
 
 @bot.command()
