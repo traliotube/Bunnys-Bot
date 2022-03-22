@@ -46,7 +46,7 @@ async def ping(ctx):
     await ctx.reply(f'Hello! I am there and my latency is {round(bot.latency*1000)}ms ')
 
 
-@bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
+@bot.command(name='clear', help='Bulk delete messages by specifying number of messages to delete')
 @has_permissions(manage_channels = True, manage_roles = True, ban_members=True)
 async def clear(ctx, ammount=4):
     am = ammount
