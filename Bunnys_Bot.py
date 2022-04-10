@@ -46,13 +46,13 @@ async def ping(ctx):
 
 
 @bot.command(name='Bulk delete Messages', help='Bulk delete messages by specifying number of messages to delete')
-async def clear(ctx, ammount=4):
-    am = ammount
+async def clear(ctx, amount=4):
+    am = amount
 
-    await ctx.channel.purge(limit=ammount)
+    await ctx.channel.purge(limit=amount)
 
 
-@bot.command(name='Math Calcualtor', help='Use math n1 operation n2, for using the math calculator.', aliases=['math', 'calc'])
+@bot.command(name='Math Calculator', help='Use math n1 operation n2, for using the math calculator.', aliases=['math', 'calc'])
 async def math(ctx, ni, oper, ns):
     if oper == '+':
         await ctx.reply(int(ni)+int(ns))
@@ -113,7 +113,7 @@ async def help(ctx):
     embed.add_field(
         name="ping", value="Check if the bot is alive _Ex. $ping_", inline=False)
     embed.add_field(
-        name="clear", value="Bulk delete msgs by specifiying the number of msgs _Ex. $clear 6_", inline=False)
+        name="clear", value="Bulk delete msgs by specifying the number of msgs _Ex. $clear 6_", inline=False)
     embed.add_field(
         name="len", value="Use this command to get the length of char in a word *Ex. $len test*", inline=False)
     embed.add_field(
@@ -190,9 +190,9 @@ async def spoilify(ctx, *, text: str):
         if len(spoilified) <= 4:
             await ctx.reply('Your message could not be converted!')
         else:
-            await author.reply('`'+spoilified+'`')
+            await author.send('`'+spoilified+'`')
             await ctx.message.delete()
-            await ctx.reply(spoilified)
+            await ctx.message(spoilified)
 
 
 @bot.command()

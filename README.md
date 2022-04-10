@@ -14,7 +14,7 @@
 
 <br>
 
-### It is a general utility and communinty bot for discord.
+### It is a general utility and community bot for discord.
 
 <br>
 
