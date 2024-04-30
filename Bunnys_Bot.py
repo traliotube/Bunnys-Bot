@@ -64,13 +64,6 @@ async def clear_error(ctx, error):
         await ctx.send(msg)
 
 
-@clear.error
-async def clear_error(ctx, error):
-    if isinstance(error, CheckFailure):
-        msg = "Only mods can use this command!"
-        await ctx.send(msg)
-
-
 @bot.command(
     name="Math Calculator",
     help="Use math n1 operation n2, for using the math calculator.",
@@ -141,7 +134,7 @@ async def help(ctx):
         color=0x07A8ED,
     )
     embed.add_field(
-        name="Developer Website", value="https://bunnyorg.tk/", inline=False
+        name="Developer Website", value="https://bunnyorg.in/", inline=False
     )
     embed.add_field(
         name="calc",
@@ -184,17 +177,18 @@ async def help(ctx):
         name="members", value="Gives number of member count in a server", inline=False
     )
     embed.set_footer(text="A general purpose bot made by Bunny Pranav")
-    await author.send(embed=embed)
-    await ctx.reply(
-        " <:mail:867307286363897868> You have got a DM!! <:mail:867307286363897868> "
-    )
-    await ctx.message.add_reaction("🇸")
-    await ctx.message.add_reaction("🇪")
-    await ctx.message.add_reaction("🇳")
-    await ctx.message.add_reaction("🇹")
-    await ctx.message.add_reaction("▫️")
-    await ctx.message.add_reaction("🇩")
-    await ctx.message.add_reaction("🇲")
+    await ctx.reply(embed=embed)
+    # await author.send(embed=embed)
+    # await ctx.reply(
+    #     " <:mail:867307286363897868> You have got a DM!! <:mail:867307286363897868> "
+    # )
+    # await ctx.message.add_reaction("🇸")
+    # await ctx.message.add_reaction("🇪")
+    # await ctx.message.add_reaction("🇳")
+    # await ctx.message.add_reaction("🇹")
+    # await ctx.message.add_reaction("▫️")
+    # await ctx.message.add_reaction("🇩")
+    # await ctx.message.add_reaction("🇲")
 
 
 @bot.command()
@@ -207,13 +201,11 @@ async def info(ctx):
         name="Support Server", value="https://discord.gg/dTehKH5kNE", inline=False
     )
     embed.add_field(
-        name="Developer Website", value="https://bunnyorg.tk/", inline=False
+        name="Developer Website", value="https://bunnyorg.in/", inline=False
     )
     embed.add_field(name="Servers I am in", value=len(bot.guilds), inline=False)
-    embed.add_field(
-        name="My Creator And Developer", value="Bunny Pranav#8468", inline=False
-    )
-    embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
+    embed.add_field(name="My Creator And Developer", value="bunnypranav", inline=False)
+    embed.set_footer(text="My Creator And Developer : bunnypranav")
     await ctx.reply(embed=embed)
 
 
@@ -239,7 +231,7 @@ async def vote(ctx):
         value="https://discordbotlist.com/bots/bunnys-bot/upvote",
         inline=False,
     )
-    embed.set_footer(text="My Creator And Developer : Bunny Pranav#8468")
+    embed.set_footer(text="My Creator And Developer : bunnypranav")
     await ctx.reply(embed=embed)
 
 
