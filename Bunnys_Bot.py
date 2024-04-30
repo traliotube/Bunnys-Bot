@@ -3,7 +3,6 @@ import random
 import requests
 import re
 import os
-import topgg
 from discord.ext import commands
 from discord.ext import tasks
 from bs4 import BeautifulSoup
@@ -14,8 +13,6 @@ load_dotenv()
 bot = commands.Bot(
     command_prefix="$", case_insensitive=True, intents=discord.Intents.all()
 )
-bot.topggpy = topgg.DBLClient(bot, os.getenv("TOPGGTOKEN"))
-
 bot.remove_command("help")
 
 
@@ -305,20 +302,6 @@ async def members(ctx):
 
 
 # end commands
-
-
-@tasks.loop(minutes=30)
-async def update_stats():
-    # This function runs every 30 minutes to automatically update your server count.
-    try:
-        await bot.topggpy.post_guild_count()
-        print(f"Posted server count ({bot.topggpy.guild_count})")
-
-    except Exception as e:
-        print(f"Failed to post server count\n{e.__class__.__name__}: {e}")
-
-
-update_stats.start()
 ready_task = bot.loop.create_task(send_self_dm())
 
 bot.run(os.getenv("TOKEN"))
